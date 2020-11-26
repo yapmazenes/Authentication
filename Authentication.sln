@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "oauth", "oauth", "{C940D495
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{03819CE6-C13E-4ABE-867D-8C68C840D6A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{AC836A98-2F88-4719-8658-3C681A19455D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{AC836A98-2F88-4719-8658-3C681A19455D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

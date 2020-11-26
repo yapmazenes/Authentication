@@ -14,7 +14,8 @@ namespace Client
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(config => {
+            services.AddAuthentication(config =>
+            {
                 //We check the cookie to confirm that we are authenticated
                 config.DefaultAuthenticateScheme = "ClientCookie";
                 //When we sign in we will deal out cookie
@@ -22,12 +23,20 @@ namespace Client
                 //use this to check if we are allowed to do something
                 config.DefaultChallengeScheme = "OurServer";
 
-            
+
             })
                 .AddCookie("ClientCookie")
-                .AddOAuth("OurServer",config=> { });
+                .AddOAuth("OurServer", config =>
+                {
+                    config.ClientId = "client_id";
+                    config.ClientSecret = "client_secret";
+                    config.CallbackPath = "/oauth/callback";
+                    config.AuthorizationEndpoint = "https://localhost:44375/oauth/authorize";
+                    config.TokenEndpoint = "https://localhost:44375/oauth/token";
+                });
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

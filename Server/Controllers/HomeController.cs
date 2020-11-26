@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -18,6 +19,8 @@ namespace Server.Controllers
         [Authorize]
         public IActionResult Secret()
         {
+            var token = HttpContext.GetTokenAsync("access_token"); 
+
             return View();
         }
 

@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Client
@@ -59,6 +58,8 @@ namespace Client
                         }
                     };
                 });
+
+            services.AddHttpClient();
 
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();

@@ -21,7 +21,7 @@ namespace Server
                     var secretBytes = Encoding.UTF8.GetBytes(Constants.Secret);
                     var key = new SymmetricSecurityKey(secretBytes);
                    
-                    /*config.Events = new JwtBearerEvents()
+                    config.Events = new JwtBearerEvents()
                     { //OnUrlToken
                         OnMessageReceived = contex =>
                           {
@@ -32,7 +32,7 @@ namespace Server
 
                               return Task.CompletedTask;
                           }
-                    };*/
+                    };
 
                     config.TokenValidationParameters = new TokenValidationParameters()
                     {

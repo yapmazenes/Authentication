@@ -8,24 +8,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiTwo
+namespace MvcClient
 {
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", config =>
+            services.AddAuthentication(config =>
+            {
+                config.DefaultScheme = "Cookie";
+                config.DefaultChallengeScheme = "oidc";
+            })
+                .AddCookie("Cookie")
+                .AddOpenIdConnect("oidc", config =>
                 {
                     config.Authority = "https://localhost:44338/";
-                    config.Audience = "ApiTwo";
+                    config.ClientId = "client_id_mvc";
+                    config.ClientSecret = "client_secret_mvc";
+                    config.SaveTokens = true;
 
+                    config.ResponseType = "code";
                 });
 
-            services.AddHttpClient();
 
-            services.AddControllers();
-
+            services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -43,9 +49,8 @@ namespace ApiTwo
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
             });
         }
-
     }
 }

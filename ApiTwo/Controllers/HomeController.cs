@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IdentityModel.Client;
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Threading.Tasks;
-using IdentityModel.Client;
-using IdentityModel;
 
 namespace ApiTwo.Controllers
 {
@@ -15,7 +14,7 @@ namespace ApiTwo.Controllers
             this._httpClientFactory = httpClientFactory;
         }
 
-        [Route("/")]
+        [Route("/home")]
         public async Task<IActionResult> Index()
         {
 

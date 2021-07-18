@@ -9,9 +9,19 @@ namespace IdentityServer
     {
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
-            return new List<IdentityResource> { new IdentityResources.OpenId(), new IdentityResources.Profile() };
+            return new List<IdentityResource> { new IdentityResources.OpenId()/*, new IdentityResources.Profile()*/,
+            new IdentityResource {
+                Name ="api.scope",
+                UserClaims =
+                {
+                    "product_add"
+                }
+
+            } };
         }
-        public static IEnumerable<ApiResource> GetApis() => new List<ApiResource> { new ApiResource("ApiOne"), new ApiResource("ApiTwo") };
+        public static IEnumerable<ApiResource> GetApis() => new List<ApiResource> {
+            new ApiResource("ApiOne", new string [] {"product_list" }),
+            new ApiResource("ApiTwo") };
 
         public static IEnumerable<Client> GetClients() => new List<Client> {
                                 new Client { ClientId = "client_id" ,
@@ -22,8 +32,12 @@ namespace IdentityServer
                                 new Client { ClientId = "client_id_mvc" ,
                                              ClientSecrets = new List<Secret> { new Secret("client_secret_mvc".ToSha256())},
                                              AllowedGrantTypes =  GrantTypes.Code,
-                                             AllowedScopes  = {"ApiOne","ApiTwo",IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile},
+                                             AllowedScopes  = {"ApiOne","ApiTwo",IdentityServerConstants.StandardScopes.OpenId,/*IdentityServerConstants.StandardScopes.Profile,*/"api.scope"},
                                              RedirectUris ={ "https://localhost:44303/signin-oidc"},
+                                             
+                                             //puts all the claims in the id token
+                                             //AlwaysIncludeUserClaimsInIdToken=true,
+                                             AllowOfflineAccess =true,
                                              RequireConsent =false
                                            },
                                         };

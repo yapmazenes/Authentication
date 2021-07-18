@@ -1,12 +1,8 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MvcClient
 {
@@ -28,9 +24,25 @@ namespace MvcClient
                     config.SaveTokens = true;
 
                     config.ResponseType = "code";
+
+                    //configure cookie claim mapping
+                    config.ClaimActions.DeleteClaim("amr");
+                    config.ClaimActions.DeleteClaim("s_hash");
+                    config.ClaimActions.MapUniqueJsonKey("Product.Add", "product_add");
+
+                    //two trips to load claims in to load to the cookie
+                    //but the id token is smaller !
+                    config.GetClaimsFromUserInfoEndpoint = true;
+
+                    //configure scope
+                    config.Scope.Clear();
+                    config.Scope.Add("openid");
+                    config.Scope.Add("api.scope");
+                    config.Scope.Add("ApiOne");
+                    config.Scope.Add("offline_access");
                 });
 
-
+            services.AddHttpClient();
             services.AddControllersWithViews();
         }
 

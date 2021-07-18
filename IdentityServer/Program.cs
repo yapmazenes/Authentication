@@ -23,6 +23,8 @@ namespace IdentityServer
 
                 var user = new IdentityUser("admin");
                 userManager.CreateAsync(user, "password").GetAwaiter().GetResult();
+                userManager.AddClaimAsync(user, new System.Security.Claims.Claim("product_add", "true")).GetAwaiter().GetResult();
+                userManager.AddClaimAsync(user, new System.Security.Claims.Claim("product_list", "true")).GetAwaiter().GetResult();
             }
 
             host.Run();

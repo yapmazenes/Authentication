@@ -14,6 +14,8 @@ namespace ApiOne.Controllers
         [Authorize]
         public string Index()
         {
+            var claims = User.Claims.ToList();
+
             return "secret message from ApiOne";
         }
     }

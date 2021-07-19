@@ -1,5 +1,15 @@
-﻿
+﻿@*<button onclick="extractTokens()">Extract Tokens</button>*@
 
-<button onclick="extractTokens()">Extract Tokens</button>
+@*<script src="~/sign-in-callback.js"></script>*@
 
-<script src="~/sign-in-callback.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client/1.11.5/oidc-client.min.js" integrity="sha512-pGtU1n/6GJ8fu6bjYVGIOT9Dphaw5IWPwVlqkpvVgqBxFkvdNbytUh0H8AP15NYF777P4D3XEeA/uDWFCpSQ1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+
+    var userManager = new Oidc.UserManager();
+    userManager.signinCallback().then(res => {
+        console.log(res);
+
+        window.location.href = "/home/index";
+    });
+</script>

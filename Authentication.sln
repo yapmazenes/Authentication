@@ -28,7 +28,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiOne", "ApiOne\ApiOne.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTwo", "ApiTwo\ApiTwo.csproj", "{860AB46D-8AE0-4C8B-81A8-C17EDC1AD791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcClient", "MvcClient\MvcClient.csproj", "{4D388E65-11F3-48F5-AF62-B41D1148B54B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcClient", "MvcClient\MvcClient.csproj", "{4D388E65-11F3-48F5-AF62-B41D1148B54B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JavascriptClient", "JavascriptClient\JavascriptClient.csproj", "{61A8B4AC-7F1D-4F9E-AB0D-993826BF9CBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +74,10 @@ Global
 		{4D388E65-11F3-48F5-AF62-B41D1148B54B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D388E65-11F3-48F5-AF62-B41D1148B54B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D388E65-11F3-48F5-AF62-B41D1148B54B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61A8B4AC-7F1D-4F9E-AB0D-993826BF9CBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61A8B4AC-7F1D-4F9E-AB0D-993826BF9CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61A8B4AC-7F1D-4F9E-AB0D-993826BF9CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61A8B4AC-7F1D-4F9E-AB0D-993826BF9CBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{1EE2A15B-BA79-46A5-9BE1-096E4A832F11} = {19B57C86-D409-42C5-B9D8-B20357478DE2}
 		{860AB46D-8AE0-4C8B-81A8-C17EDC1AD791} = {19B57C86-D409-42C5-B9D8-B20357478DE2}
 		{4D388E65-11F3-48F5-AF62-B41D1148B54B} = {19B57C86-D409-42C5-B9D8-B20357478DE2}
+		{61A8B4AC-7F1D-4F9E-AB0D-993826BF9CBF} = {19B57C86-D409-42C5-B9D8-B20357478DE2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E9C37E7-8FC0-42A3-90B0-D711BB96DCCF}

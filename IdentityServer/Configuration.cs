@@ -40,6 +40,13 @@ namespace IdentityServer
                                              AllowOfflineAccess =true,
                                              RequireConsent =false
                                            },
+                                new Client { ClientId = "client_id_js",
+                                             RedirectUris ={ "https://localhost:44394/home/signin"},
+                                             AllowedGrantTypes =  GrantTypes.Implicit,
+                                             AllowedScopes  = {"ApiOne",IdentityServerConstants.StandardScopes.OpenId},
+                                             AllowAccessTokensViaBrowser =true,
+                                             RequireConsent=false
+                                }
                                         };
     }
 }

@@ -32,7 +32,13 @@ namespace IdentityServer
                                 new Client { ClientId = "client_id_mvc" ,
                                              ClientSecrets = new List<Secret> { new Secret("client_secret_mvc".ToSha256())},
                                              AllowedGrantTypes =  GrantTypes.Code,
-                                             AllowedScopes  = {"ApiOne","ApiTwo",IdentityServerConstants.StandardScopes.OpenId,/*IdentityServerConstants.StandardScopes.Profile,*/"api.scope"},
+                                             AllowedScopes  = {
+                                                "ApiOne",
+                                                "ApiTwo",
+                                                IdentityServerConstants.StandardScopes.OpenId,
+                                                /*IdentityServerConstants.StandardScopes.Profile,*/
+                                                "api.scope"},
+
                                              RedirectUris ={ "https://localhost:44303/signin-oidc"},
                                              
                                              //puts all the claims in the id token
@@ -44,7 +50,12 @@ namespace IdentityServer
                                              RedirectUris = { "https://localhost:44394/home/signin"},
                                              AllowedCorsOrigins = { "https://localhost:44394" },
                                              AllowedGrantTypes =  GrantTypes.Implicit,
-                                             AllowedScopes  = {"ApiOne",IdentityServerConstants.StandardScopes.OpenId},
+                                             AllowedScopes  = {
+                                                IdentityServerConstants.StandardScopes.OpenId,
+                                                "ApiOne",
+                                                "ApiTwo",
+                                                "api.scope"
+                                            },
                                              AllowAccessTokensViaBrowser =true,
                                              RequireConsent=false
                                             }

@@ -20,9 +20,12 @@ namespace IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+
             services.AddDbContext<AppDbContext>(config =>
             {
-                config.UseInMemoryDatabase("Memory");
+                config.UseSqlServer(connectionString);
+                //config.UseInMemoryDatabase("Memory");
             });
 
             //AddIdentity registers the services
@@ -44,11 +47,23 @@ namespace IdentityServer
                 config.LoginPath = "/Auth/Login";
             });
 
+            var assembly = typeof(Startup).Assembly.GetName().Name;
+
             services.AddIdentityServer()
                 .AddAspNetIdentity<IdentityUser>()
-                .AddInMemoryApiResources(IdentityServer.Configuration.GetApis())
-                .AddInMemoryIdentityResources(IdentityServer.Configuration.GetIdentityResources())
-                .AddInMemoryClients(IdentityServer.Configuration.GetClients())
+                  .AddConfigurationStore(options =>
+                  {
+                      options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+                          sql => sql.MigrationsAssembly(assembly));
+                  })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+                    sql => sql.MigrationsAssembly(assembly));
+                })
+                //.AddInMemoryApiResources(IdentityServer.Configuration.GetApis())
+                //.AddInMemoryIdentityResources(IdentityServer.Configuration.GetIdentityResources())
+                //.AddInMemoryClients(IdentityServer.Configuration.GetClients())
                 .AddDeveloperSigningCredential();
 
             services.AddControllersWithViews();

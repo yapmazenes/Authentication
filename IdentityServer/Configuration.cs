@@ -40,7 +40,10 @@ namespace IdentityServer
                                                 "api.scope"},
 
                                              RedirectUris ={ "https://localhost:44303/signin-oidc"},
+                                             PostLogoutRedirectUris ={ "https://localhost:44303/Home/Index"},
                                              
+                                             //We have to add records to the relevant table (PostLogoutRedirectUris) in the Database by associating the PostLogoutRedirectUri and the ClientId (e.g. clientIdMvc and client_id_js)
+
                                              //puts all the claims in the id token
                                              //AlwaysIncludeUserClaimsInIdToken=true,
                                              AllowOfflineAccess =true,
@@ -48,6 +51,8 @@ namespace IdentityServer
                                            },
                                 new Client { ClientId = "client_id_js",
                                              RedirectUris = { "https://localhost:44394/home/signin"},
+                                             PostLogoutRedirectUris ={ "https://localhost:44394/Home/Index"},
+
                                              AllowedCorsOrigins = { "https://localhost:44394" },
                                              AllowedGrantTypes =  GrantTypes.Implicit,
                                              AllowedScopes  = {

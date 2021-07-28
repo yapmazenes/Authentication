@@ -1,4 +1,5 @@
 ﻿using IdentityServer.ViewModels;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -8,18 +9,35 @@ namespace IdentityServer.Controllers
     public class AuthController : Controller
     {
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IIdentityServerInteractionService _identityServerInteractionService;
 
-        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IIdentityServerInteractionService identityServerInteractionService)
         {
             _signInManager = signInManager;
-            this.userManager = userManager;
+            _userManager = userManager;
+            _identityServerInteractionService = identityServerInteractionService;
         }
 
         [HttpGet]
         public IActionResult Login(string returnUrl)
         {
             return View(new LoginViewModel { ReturnUrl = returnUrl });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout(string logoutId)
+        {
+            await _signInManager.SignOutAsync();
+
+            var logoutRequest = await _identityServerInteractionService.GetLogoutContextAsync(logoutId);
+
+            if (string.IsNullOrEmpty(logoutRequest.PostLogoutRedirectUri))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return Redirect(logoutRequest.PostLogoutRedirectUri);
         }
 
         [HttpPost]
@@ -54,7 +72,7 @@ namespace IdentityServer.Controllers
             }
 
             var user = new IdentityUser(vm.Username);
-            var result = await userManager.CreateAsync(user, vm.Password);
+            var result = await _userManager.CreateAsync(user, vm.Password);
 
             if (result.Succeeded)
             {

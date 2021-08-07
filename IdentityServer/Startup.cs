@@ -56,7 +56,7 @@ namespace IdentityServer
             var assembly = typeof(Startup).Assembly.GetName().Name;
 
             var filePath = Path.Combine(_webHostEnvironment.ContentRootPath, "is_cert.pfx"); //Created Certificate name by Powershell https://docs.microsoft.com/en-us/archive/blogs/kaevans/using-powershell-with-certificates
-            var certificate = new X509Certificate2(filePath,"password");
+            var certificate = new X509Certificate2(filePath, "password");
 
             services.AddIdentityServer()
                 .AddAspNetIdentity<IdentityUser>()
@@ -71,10 +71,18 @@ namespace IdentityServer
                     sql => sql.MigrationsAssembly(assembly));
                 })
                 .AddSigningCredential(certificate);
-                //.AddInMemoryApiResources(IdentityServer.Configuration.GetApis())
-                //.AddInMemoryIdentityResources(IdentityServer.Configuration.GetIdentityResources())
-                //.AddInMemoryClients(IdentityServer.Configuration.GetClients())
-                //.AddDeveloperSigningCredential();
+            //.AddInMemoryApiResources(IdentityServer.Configuration.GetApis())
+            //.AddInMemoryIdentityResources(IdentityServer.Configuration.GetIdentityResources())
+            //.AddInMemoryClients(IdentityServer.Configuration.GetClients())
+            //.AddDeveloperSigningCredential();
+
+            services.AddAuthentication().AddFacebook(config =>
+            {
+                config.AppId = "FaceBookAppId";
+                config.AppSecret = "secret";
+
+
+            });
 
             services.AddControllersWithViews();
         }
